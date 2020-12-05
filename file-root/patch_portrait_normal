@@ -1,0 +1,137 @@
+<!-- CREAZIONE ICEMAN SUPERSU-->
+		<page name="flash_confirm_ICEMAN">
+			<template name="page"/>
+			
+			<text style="text_l">
+				<placement x="%col1_x_header%" y="%row3_header_y%"/>
+				<text>ROOT / UNROOT</text>
+			</text>
+
+			<fileselector>
+				<header background="" textcolor="" separatorcolor="" separatorheight=""/>
+				<condition var1="tw_selectimage" var2="0"/>
+				<placement x="%indent%" y="%row3_y%" w="%content_width%" h="%fileselector_install_height%"/>
+				<filter extn="" folders="0" files="1"/>
+				<path name="tw_zip_location" default="/sbin/iceroot"/>
+				<data name="tw_filename"/>
+				<selection name="tw_file"/>
+			</fileselector>
+			
+			<slider>
+				<text>{@swipe_flash=Swipe to confirm Flash} %tw_file%</text>
+					<condition var1="tw_filename" op="modified"/>
+					<action function="queuezip"/>
+				    <action function="flash">flash_zip_ICEMAN</action>
+			</slider>
+			
+			<action>
+				<touch key="back"/>
+				<action function="page">flash_confirm_ICEMAN</action>
+				<action function="set">tw_zip_location=/sbin/iceroot</action>
+			</action>
+
+			<action>
+				<touch key="home"/>
+				<action function="page">main</action>
+				<action function="set">tw_zip_location=/sdcard</action>
+			</action>
+		</page>
+		
+		<page name="flash_zip_ICEMAN">
+			<template name="page"/>
+
+			<text style="text_l">
+				<placement x="%col1_x_header%" y="%row3_header_y%"/>
+				<text>ROOT / UNROOT</text>
+			</text>
+
+			<template name="console"/>
+
+			<template name="progress_bar"/>
+
+			<action>
+				<condition var1="tw_operation_state" var2="1"/>
+				<action function="page">flash_done_ICEMAN</action>
+			</action>
+		</page>
+
+		<page name="flash_done_ICEMAN">
+			<template name="page"/>
+
+			<text style="text_l">
+				<placement x="%col1_x_header%" y="%row3_header_y%"/>
+				<text>ROOT / UNROOT</text>
+			</text>
+
+			<text style="text_m_fail">
+				<condition var1="tw_operation_status" op="!=" var2="0"/>
+				<placement x="%col1_x_header%" y="%row4_header_y%"/>
+				<text>{@failed=Failed}</text>
+			</text>
+
+			<text style="text_m">
+				<condition var1="tw_operation_status" var2="0"/>
+				<placement x="%col1_x_header%" y="%row4_header_y%"/>
+				<text>{@successful=Successful}</text>
+			</text>
+
+			<template name="console"/>
+
+			<button style="main_button_half_height">
+				<placement x="%indent%" y="%row21a_y%"/>
+				<text>{@wipe_cache_dalvik_btn=Wipe cache/dalvik}</text>
+				<actions>
+					<action function="set">tw_back=flash_done</action>
+					<action function="set">tw_action=wipe</action>
+					<action function="set">tw_action_param=/cache</action>
+					<action function="set">tw_has_action2=1</action>
+					<action function="set">tw_action2=wipe</action>
+					<action function="set">tw_action2_param=dalvik</action>
+					<action function="set">tw_text1={@wipe_cache_dalvik_confirm=Wipe Cache &amp; Dalvik?}</action>
+					<action function="set">tw_action_text1={@wiping_cache_dalvik=Wiping Cache &amp; Dalvik...}</action>
+					<action function="set">tw_complete_text1={@wipe_cache_dalvik_complete=Cache &amp; Dalvik Wipe Complete}</action>
+					<action function="set">tw_slider_text={@swipe_wipe=Swipe to Wipe}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+
+			<button style="main_button_half_height">
+				<placement x="%center_x%" y="%row21a_y%"/>
+				<text>{@reboot_system_btn=Reboot System}</text>
+				<actions>
+					<action function="set">tw_back=main2</action>
+					<action function="page">reboot_system_routine</action>
+				</actions>
+			</button>
+			
+			<action>
+				<touch key="back"/>
+				<action function="cancelzip"/>
+				<action function="page">main</action>
+				<action function="set">tw_zip_location=/sdcard</action>
+			</action>
+
+			<action>
+				<touch key="home"/>
+				<actions>
+					<action function="set">tw_clear_destination=main2</action>
+					<action function="page">clear_vars</action>
+					<action function="set">tw_zip_location=/sdcard</action>
+				</actions>
+			</action>
+
+			<action>
+				<conditions>
+					<condition var1="tw_install_reboot" var2="1"/>
+					<condition var1="tw_operation_status" var2="0"/>
+					<condition var1="tw_reboot_system" var2="1"/>
+				</conditions>
+				<actions>
+					<action function="set">tw_sleep=%tw_sleep_total%</action>
+					<action function="page">flash_sleep_and_reboot</action>
+				</actions>
+			</action>
+		</page>
+<!-- FINE CREAZIONE ICEMAN SUPERSU-->
+	</pages>
+</recovery>
