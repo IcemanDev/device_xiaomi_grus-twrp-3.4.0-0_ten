@@ -22,3 +22,6 @@ cd ~/your_twrp_folder
 . build/envsetup.sh && lunch omni_grus-eng && mka recoveryimage | tee twrp.log
 
 ```
+If you want to build TWRP and kernel you need to flag TARGET_PREBUILT_KERNEL, TARGET_PREBUILT_DTB and BOARD_PREBUILT_DTBOIMAGE in the BoardConfig.mk file (#TARGET_PREBUILT_KERNEL, #TARGET_PREBUILT_DTB and #BOARD_PREBUILT_DTBOIMAGE) and download the kernel source code.
+
+Kernel source: https://github.com/pengus77/kowalski-grus
