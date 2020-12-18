@@ -57,11 +57,10 @@ BOARD_RAMDISK_OFFSET       := 0x01000000
 BOARD_DTB_OFFSET           := 0x01f00000
 TARGET_KERNEL_ARCH := arm64
 
-TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb
-TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
-BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtbo
+# Kernel development (true if kernel development - false if kernel prebuilt)
+KERNEL_DEVELOPMENT := false
 
-ifeq ($(TARGET_PREBUILT_KERNEL),)
+ifeq ($(KERNEL_DEVELOPMENT),true)
   TARGET_KERNEL_CONFIG := kowalski_defconfig
   TARGET_KERNEL_CLANG_COMPILE := true
   TARGET_KERNEL_SOURCE := kernel/xiaomi/grus
@@ -78,6 +77,9 @@ ifeq ($(TARGET_PREBUILT_KERNEL),)
   BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
   #BOARD_MKBOOTIMG_ARGS += --dtb $(TARGET_PREBUILT_DTB)
 else
+  TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb
+  TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
+  BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtbo
   BOARD_INCLUDE_RECOVERY_DTBO := true
   BOARD_INCLUDE_DTB_IN_BOOTIMG := true
   BOARD_MKBOOTIMG_ARGS += --base $(BOARD_KERNEL_BASE)
