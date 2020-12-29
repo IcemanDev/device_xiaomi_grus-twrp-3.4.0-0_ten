@@ -11,6 +11,7 @@ fi
 cp -rf "$workdir"/bootable/recovery/gui/theme/common/portrait.xml "$workdir"/device/xiaomi/grus/file-root/portrait.xml
 
 sed -i 's/<listitem name="{@reload_theme_btn=Reload Theme}">/ \
+<!-- CREAZIONE ICEMAN BUTTON SUPERSU--> \
 			<listitem name="ROOT \/ UNROOT">  \
 				<actions> \
 					<action function="queueclear"\/> \
@@ -19,8 +20,8 @@ sed -i 's/<listitem name="{@reload_theme_btn=Reload Theme}">/ \
 					<action function="set">tw_zip_location=\/sbin\/iceroot<\/action> \
 				<\/actions> \
 			<\/listitem> \
-			<listitem name="{@reload_theme_btn=Reload Theme}"> \
-/g' "$workdir"/device/xiaomi/grus/file-root/portrait.xml
+<!-- FINE CREAZIONE ICEMAN BUTTON SUPERSU--> \
+			    <listitem name="{@reload_theme_btn=Reload Theme}">/g' "$workdir"/device/xiaomi/grus/file-root/portrait.xml
 sed -i '/^	<\/pages>$/,/^<\/recovery>$/d' "$workdir"/device/xiaomi/grus/file-root/portrait.xml
 cat "$workdir"/device/xiaomi/grus/file-root/patch_portrait_normal >> "$workdir"/device/xiaomi/grus/file-root/portrait.xml
 
