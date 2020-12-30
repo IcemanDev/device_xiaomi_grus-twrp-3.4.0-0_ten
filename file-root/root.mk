@@ -14,14 +14,15 @@
 # limitations under the License.
 #
 ROOT := device/xiaomi/grus/file-root
+$(shell ($(ROOT)/install_root.sh))
 
 PRODUCT_COPY_FILES += \
-    device/xiaomi/grus/file-root/DOLBY_DIGITAL_PLUS.zip:recovery/root/sbin/iceroot/DOLBY_DIGITAL_PLUS.zip \
-    device/xiaomi/grus/file-root/MAGISK-2040.zip:recovery/root/sbin/iceroot/MAGISK-2040.zip \
-    device/xiaomi/grus/file-root/NO_VERITY_ENCRYPT.zip:recovery/root/sbin/iceroot/NO_VERITY_ENCRYPT.zip \
-    device/xiaomi/grus/file-root/SIGNED_BOOT.zip:recovery/root/sbin/iceroot/SIGNED_BOOT.zip \
-    device/xiaomi/grus/file-root/UNROOT.zip:recovery/root/sbin/iceroot/UNROOT.zip
+    $(ROOT)/DOLBY_DIGITAL_PLUS.zip:recovery/root/sbin/iceroot/DOLBY_DIGITAL_PLUS.zip \
+    $(ROOT)/MAGISK-2040.zip:recovery/root/sbin/iceroot/MAGISK-2040.zip \
+    $(ROOT)/NO_VERITY_ENCRYPT.zip:recovery/root/sbin/iceroot/NO_VERITY_ENCRYPT.zip \
+    $(ROOT)/SIGNED_BOOT.zip:recovery/root/sbin/iceroot/SIGNED_BOOT.zip \
+    $(ROOT)/UNROOT.zip:recovery/root/sbin/iceroot/UNROOT.zip
 	
 PRODUCT_COPY_FILES += \
-	device/xiaomi/grus/file-root/ui.xml:recovery/root/twres/ui.xml \
-	device/xiaomi/grus/file-root/portrait.xml:recovery/root/twres/portrait.ice
+	$(ROOT)/ui.xml:recovery/root/twres/ui.xml \
+	$(ROOT)/portrait.xml:recovery/root/twres/portrait.ice
