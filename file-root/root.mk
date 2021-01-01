@@ -18,7 +18,7 @@ $(shell ($(ROOT)/install_root.sh))
 
 PRODUCT_COPY_FILES += \
     $(ROOT)/DOLBY_DIGITAL_PLUS.zip:recovery/root/sbin/iceroot/DOLBY_DIGITAL_PLUS.zip \
-    $(ROOT)/MAGISK-2040.zip:recovery/root/sbin/iceroot/MAGISK-2040.zip \
+    $(ROOT)/MAGISK-2120.zip:recovery/root/sbin/iceroot/MAGISK-2120.zip \
     $(ROOT)/NO_VERITY_ENCRYPT.zip:recovery/root/sbin/iceroot/NO_VERITY_ENCRYPT.zip \
     $(ROOT)/SIGNED_BOOT.zip:recovery/root/sbin/iceroot/SIGNED_BOOT.zip \
     $(ROOT)/UNROOT.zip:recovery/root/sbin/iceroot/UNROOT.zip
